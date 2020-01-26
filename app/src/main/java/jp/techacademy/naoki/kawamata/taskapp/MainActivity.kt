@@ -91,6 +91,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+
+        focus_button.setOnClickListener{
+
+            val key =  search_edit_text.text.toString()
+            val taskRealmResult = mRealm.where(Task::class.java).equalTo("category", key).findAll()
+
+            mTaskAdapter.taskList = mRealm.copyFromRealm(taskRealmResult)
+            listView1.adapter = mTaskAdapter
+
+            mTaskAdapter.notifyDataSetChanged()
+
+        }
+
+
         reloadListView()
     }
 
